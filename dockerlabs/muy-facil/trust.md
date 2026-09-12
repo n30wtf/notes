@@ -2,7 +2,7 @@
 
 > **Dificultad:** Muy Fácil | **OS:** Linux \
 > **Servicio explotado:** SSH Fuerza bruta\
-> &#xNAN;_&#x48;echo a mano, sin Metasploit, con mucho sudor y amor al hacking._ 🔥
+> _&#x48;echo a mano, sin Metasploit, con mucho sudor y amor al hacking._ 🔥
 
 ***
 
@@ -110,7 +110,7 @@ En cuestión de segundos, Hydra hace su magia y nos escupe una contraseña váli
 
 Estar dentro está cheto, pero nosotros queremos ser el administrador supremo (root). Esta fase se llama **Post-Explotación / Escalada de Privilegios**.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ¿Cómo pasamos de ser el compa Mario a ser el dueño del servidor?\
 Lo primero de manual es revisar qué permisos especiales tiene nuestro usuario.
@@ -123,7 +123,7 @@ Ejecutamos:
 sudo -l
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 (Este comando lista qué cosas podemos ejecutar como superusuario).
 
@@ -137,7 +137,7 @@ Si podemos abrir vim como root, y dentro de vim podemos ejecutar comandos del si
 sudo vim -c ':!/bin/bash'
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 | Parte         | Función                                                               |
 | ------------- | --------------------------------------------------------------------- |

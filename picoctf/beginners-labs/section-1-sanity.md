@@ -18,7 +18,7 @@ Arrancamos con algo bien sencillo: el reto nos dice que la flag está **a simple
 
 Lo primero que se nos viene a la cabeza es usar el comando `cat`.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 **¿Qué es `cat`?**\
@@ -33,7 +33,7 @@ Descargamos el archivo que nos da el reto a nuestra máquina local _(esto tambi�
 cat flag
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Y listo, ahí está la flag esperándonos en texto plano. 🎯
 
@@ -53,7 +53,7 @@ Y listo, ahí está la flag esperándonos en texto plano. 🎯
 
 Seguimos avanzando. Este reto nos pide conectarnos a un servidor remoto mediante **SSH** para encontrar la flag.
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 **¿Qué es SSH?**\
@@ -69,7 +69,7 @@ Al iniciar la instancia del reto _(botón celeste)_, nos dan la siguiente info:
 * **Usuario:** `ctf-player`
 * **Contraseña:** `1db87a14`
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Nos conectamos con el siguiente comando:
 
@@ -88,7 +88,7 @@ ssh ctf-player@titan.picoctf.net -p 61368
 
 Al ejecutarlo nos pedirá la contraseña que ya nos dieron → la escribimos (no se va a ver en pantalla, es normal) y **boom**, nos muestra la flag directamente. ✅
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -102,7 +102,7 @@ Al ejecutarlo nos pedirá la contraseña que ya nos dieron → la escribimos (no
 
 Más de lo mismo por aquí. Iniciamos la instancia y vemos que nos pide usar **Netcat**.
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 **¿Qué es Netcat?**\
@@ -121,7 +121,7 @@ nc fickle-tempest.picoctf.net 60695
 
 Nos conectamos al host en el puerto indicado y automáticamente nos devuelve la flag. Así de directo. 🎯
 
-<figure><img src="../../.gitbook/assets/image (7) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

@@ -236,7 +236,7 @@ print(flag)
 
 Se nos provee un binario, su código fuente en C y un servidor al que conectarse por `nc`. El objetivo: provocar un crash controlado para obtener la flag.
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 **Nota:** El binario ejecutable sirve para practicar localmente. Para usarlo debes crear un `flag.txt` con contenido de prueba en el mismo directorio — el código lo requiere para arrancar. La flag real está en el servidor. 🌐

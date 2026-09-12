@@ -28,7 +28,7 @@ Primero, usamos el comando `file` para verificar con qué tipo de archivo estamo
 file warmup
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Como vemos, efectivamente es un archivo ejecutable, por lo que procederemos a darle permisos de ejecución (`chmod +x`) y a ejecutarlo:
 
@@ -37,7 +37,7 @@ chmod +x warmup
 ./warmup
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ¡Oh! ¿Qué pasó? Lo que nos dice básicamente es que le coloquemos un _flag_ (parámetro) `-h` para ver qué puede hacer. Y _voilà_, una vez colocado el flag vemos que nos dice que "no sabe mucho" pero nos regala la flag de la plataforma xD.
 
@@ -45,7 +45,7 @@ chmod +x warmup
 ./warmup -h
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -61,7 +61,7 @@ chmod +x warmup
 
 Siguiendo con este reto, toca pensar un poco en cómo llegar a la flag por la cantidad de información que tenemos en pantalla.
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Resolución
 
@@ -71,11 +71,11 @@ Descargamos el `.zip` que nos da el reto y lo descomprimimos con el comando `unz
 unzip Addadshashanammu.zip
 ```
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Esto nos dejará una serie de carpetas. Lo podemos visualizar mejor con el comando `tree` para ver las subcarpetas y archivos. Según la salida de `tree`, hay **7 directorios y 2 archivos**. Por lo tanto, hay 2 formas de obtener la flag:
 
-<figure><img src="../../.gitbook/assets/image (7) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **Vía código fuente:** Haciéndole un `cat` al archivo con extensión `.c`. Esto nos quiere decir que es un programa escrito en el lenguaje de programación C. Si vemos dentro del código, veremos la flag del reto quemada directamente ahí.
 * **Vía ejecución:** El hecho de que haya un `.c` nos intuye que el otro archivo es un programa compilado (ejecutable). Por ende, simplemente lo ejecutamos ¡y como vemos nos devuelve la flag de igual forma! 💡

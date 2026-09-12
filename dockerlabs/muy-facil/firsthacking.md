@@ -2,7 +2,7 @@
 
 > **Dificultad:** Muy Fácil | **OS:** Linux \
 > **Servicio explotado:** vsftpd 2.3.4 Backdoor\
-> &#xNAN;_&#x48;echo a mano, sin Metasploit, con mucho sudor y amor al hacking._ 🔥
+> _&#x48;echo a mano, sin Metasploit, con mucho sudor y amor al hacking._ 🔥
 
 ***
 
@@ -10,7 +10,7 @@
 
 Primero desplegamos la máquina en DockerLabs y esperamos a que levante correctamente. Nada del otro mundo aquí — la IP objetivo que nos asigna es `172.17.0.2`.
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -25,7 +25,7 @@ nmap -sVC -Pn 172.17.0.2
 > `-sVC` → detecta versiones de servicios y lanza scripts básicos\
 > `-Pn` → no hace ping previo (útil si ICMP está bloqueado)
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### 🎯 Resultados del escaneo
 
