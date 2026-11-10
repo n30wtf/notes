@@ -22,5 +22,6 @@
     * [Page 1](dockerlabs/facil/page-1.md)
   * [Medio](dockerlabs/medio.md)
   * [Dificil](dockerlabs/dificil.md)
-* [🌳 HackTheBox](hackthebox.md)
+* [🌳 HackTheBox](hackthebox/README.md)
+  * [HTB\_CHALLENGES](hackthebox/htb_challenges.md)
 * [🥊 TryHackme](tryhackme.md)
