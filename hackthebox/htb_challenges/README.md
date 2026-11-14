@@ -20,7 +20,7 @@
 [cripto.md](cripto.md)
 {% endcontent-ref %}
 
-{% content-ref url="rev.md" %}
-[rev.md](rev.md)
+{% content-ref url="rev/" %}
+[rev](rev/)
 {% endcontent-ref %}
 

@@ -35,6 +35,7 @@
     * [Forensis](hackthebox/htb_challenges/forensis.md)
     * [Web](hackthebox/htb_challenges/web.md)
     * [Cripto](hackthebox/htb_challenges/cripto.md)
-    * [ReV](hackthebox/htb_challenges/rev.md)
+    * [ReV](hackthebox/htb_challenges/rev/README.md)
+      * [Cyberpsychosis](hackthebox/htb_challenges/rev/cyberpsychosis.md)
   * [HTB\_MACHINES](hackthebox/htb_machines.md)
 * [🥊 TryHackme](tryhackme.md)
