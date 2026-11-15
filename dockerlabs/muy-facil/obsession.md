@@ -4,11 +4,11 @@ bueno esta es la ultima maquina de modo muy facil de dockerlabs , me gusto mucho
 
 encendemos la maquinita
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 realizamos nuestro escaneo con nmap a lo modo insano xd
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 y  vemos  que de primeras vemos dos archivos curiosos que estan en el servidor mediante ftp , y ensima nos dice que esta permitido el anonymous login , ajaja bueno entonces veamos que continenen , descarguenlo en su maquina local para que puean leerlo.
 
@@ -18,11 +18,11 @@ y  vemos  que de primeras vemos dos archivos curiosos que estan en el servidor m
 
 analizemos la web.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 vale , vemos que es una web de couching o algo asi , para la gente mamada , entonces podriamos hacer una enumeracion de directorios aver que encontramos
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 wow la enumeracion con gobuster nos da unos directorios interesantes , ingresamos yvemos que es?..
 

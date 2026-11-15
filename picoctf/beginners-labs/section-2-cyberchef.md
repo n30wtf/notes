@@ -40,13 +40,13 @@ cat values.txt
 
 Nos devuelve algo que **parece** una flag, pero con letras sin sentido — eso es porque está en ROT13. Toca descifrarlo.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Lo metes en CyberChef y aplicas la receta ROT13.Usamos tr para hacer la rotación directamente:cat values.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'¿Qué hace este comando? tr (translate) reemplaza caracteres. Le estamos diciendo: "toma las letras A-Z y cámbialas por N-Z seguido de A-M", que es exactamente la rotación de 13 posiciones.
 
 Y ahí la tenemos, flag capturada. 🎯
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -64,7 +64,7 @@ En este reto nos toca hacer una **conversión de bases**: pasar de **base 16 (he
 
 El valor que nos dan es `0x3D`.
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 > **Bases numéricas en 30 segundos:**
 

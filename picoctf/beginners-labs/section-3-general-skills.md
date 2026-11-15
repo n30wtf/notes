@@ -28,7 +28,7 @@ Primero, usamos el comando `file` para verificar con qué tipo de archivo estamo
 file warmup
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Como vemos, efectivamente es un archivo ejecutable, por lo que procederemos a darle permisos de ejecución (`chmod +x`) y a ejecutarlo:
 
@@ -37,7 +37,7 @@ chmod +x warmup
 ./warmup
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ¡Oh! ¿Qué pasó? Lo que nos dice básicamente es que le coloquemos un _flag_ (parámetro) `-h` para ver qué puede hacer. Y _voilà_, una vez colocado el flag vemos que nos dice que "no sabe mucho" pero nos regala la flag de la plataforma xD.
 
@@ -45,7 +45,7 @@ chmod +x warmup
 ./warmup -h
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

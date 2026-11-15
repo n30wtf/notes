@@ -18,7 +18,7 @@ Arrancamos con algo bien sencillo: el reto nos dice que la flag está **a simple
 
 Lo primero que se nos viene a la cabeza es usar el comando `cat`.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 **¿Qué es `cat`?**\
@@ -33,7 +33,7 @@ Descargamos el archivo que nos da el reto a nuestra máquina local _(esto tambi�
 cat flag
 ```
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Y listo, ahí está la flag esperándonos en texto plano. 🎯
 
@@ -53,7 +53,7 @@ Y listo, ahí está la flag esperándonos en texto plano. 🎯
 
 Seguimos avanzando. Este reto nos pide conectarnos a un servidor remoto mediante **SSH** para encontrar la flag.
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 **¿Qué es SSH?**\
