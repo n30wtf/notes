@@ -6,7 +6,7 @@ honestamente me costo un monton , no soy tan bueno en reversing , pero me da un 
 
 pero como siempre digo , "Romper cosas para ver cómo funcionan es la forma más pura de curiosidad"
 
-ahora bien , eleji este reto , por que me ayudo a comprender mucho , como es que logran identificar y averiguar su funcionalidad con estos tipos de malware.
+ahora bien , eleji este reto , por que me ayudo a comprender mucho , por que es importante enteder cada pieza del rompecabezas para hallar la respuesta.
 
 
 
@@ -73,48 +73,100 @@ tenemos la palabra clave a buscar por que dentro de el syscall getdents esta ocu
 
 entonces como encontramos el archivo si lo que hace el rootkit es ocultarlo cuando intentamos buscar esa carpeta?
 
-aqui es donde analize el siguiente syscall que es kill , al analizarlo encontramos que utiliza el segundo argumento de kill llamado sig.
+aqui es donde analize el siguiente syscall que es kill , al analizarlo encontramos que utiliza el segundo argumento de kill llamado sig para darnos acceso root.
 
-El syscall `kill(pid, sig)` envía una señal `sig` a un proceso `pid`. El rootkit **reemplaza** ese syscall con su propia función. Cada vez que cualquier programa del sistema llama a `kill`, pasa por aquí.
+#### Qué es `kill` y por qué nos importa
 
-<figure><img src="../../../.gitbook/assets/image (144).png" alt=""><figcaption></figcaption></figure>
+`kill(pid, sig)` es el syscall que usan los programas para **enviar una señal** a un proceso. Normalmente se usa para matar cosas (`kill -9`), pero en realidad sirve para enviar cualquier señal.
 
-La lógica (simplificada) es:
+<figure><img src="../../../.gitbook/assets/image (145).png" alt=""><figcaption></figcaption></figure>
 
-text
+¿Por qué nos importa? Porque en el decompilado de ghidra vemos que el módulo define `hacked_kill` y guarda un `orig_kill`. Ese patrón (versión "hacked" + original guardado) es la firma clásica de un **hookeo de syscall**: el rootkit reemplaza el `kill` real por el suyo, y cada `kill` del sistema pasa primero por aquí. OsEa el rootkit se ha montado un **canal de comunicación secreto** usando señales que parecen normales.
+
+#### La lógica, en modo resumen
+
+c
 
 ```
-señal = pt_regs->si              // el segundo argumento de kill(pid, sig)
-si señal == 0x2e (46):  alternar visibilidad del módulo
-si señal == 0x40 (64):  dar root al proceso que envía la señal
-si señal == 0x1f (31):  alternar invisibilidad de un proceso
-si no coincide:         llamar a orig_kill (comportamiento normal)
+señal = pt_regs->si;             // el segundo argumento de kill(pid, sig)
+
+if (señal == 0x2e) { ... }       // 46: alternar visibilidad del módulo
+else if (señal == 0x40) { ... }  // 64: darme root, por favor y gracias
+else if (señal == 0x1f) { ... }  // 31: alternar invisibilidad de un proceso
+else { orig_kill(...); }         // lo normal: pasa de largo
 ```
 
-Tres detalles importantes:
+El rootkit **mira la señal antes que nadie**. Si es una de sus tres mágicas, hace lo suyo y **no** reenvía nada. Si no coincide, se hace el tontito y llama al `kill` original como si aquí no hubiera pasado nada.
 
-* **Las señales mágicas se consumen.** La rama de `0x40` hace `return 0` **sin** llamar a `orig_kill`. Eso significa que la señal 64 nunca llega al kernel real: es un "código de comando" disfrazado de señal.
-* **Las señales normales siguen funcionando.** `kill -9`, `kill -15`, etc. caen en el `else` final y se reenvían a `orig_kill`. El rootkit no rompe nada: solo intercepta lo suyo. Eso es lo que lo hace sigiloso.
-* **La señal 46 es un toggle**, no "mostrar" y ya. Si el módulo está oculto, lo muestra; si está visible, lo oculta. En el reto arranca oculto, así que la primera 46 lo hace visible.
-
-#### La rama de root, línea por línea
+#### La rama de root, sin dramas
 
 c
 
 ```
 else if (señal == 0x40) {
-    creds = prepare_creds();       // copia modificable de las credenciales actuales
+    creds = prepare_creds();       // "dame una copia editable de mis credenciales"
     if (creds != NULL) {
-        creds->uid  = creds->gid  = 0;   // (en C real son 4 campos de 8 bytes cada uno,
-        creds->suid = creds->sgid = 0;   //  que cubren uid/gid, suid/sgid, euid/egid, fsuid/fsgid)
-        creds->euid = creds->egid = 0;
-        creds->fsuid= creds->fsgid= 0;
-        commit_creds(creds);             // instala las nuevas credenciales en `current`
+        creds->uid   = creds->gid   = 0;   // los 8 campos de identidad a cero
+        creds->suid  = creds->sgid  = 0;
+        creds->euid  = creds->egid  = 0;
+        creds->fsuid = creds->fsgid = 0;
+        commit_creds(creds);             // "vale, ahora sí, aplica esto"
     }
-    return 0;                             // sale SIN llamar a orig_kill
+    return 0;                             // y se pirra sin llamar a orig_kill
 }
 ```
 
-**Por qué da root:** poner a 0 los ocho campos (`uid`, `gid`, `suid`, `sgid`, `euid`, `egid`, `fsuid`, `fsgid`) es exactamente lo que hace el kernel cuando un proceso es root. `prepare_creds` da una copia modificable; `commit_creds` la instala en el proceso **actual**.
+**Qué pasa aquí, "ay we mi mente":**
 
-**Por qué `$$`:** el rootkit modifica las credenciales de `current`, que es **el proceso que invocó el `kill`**, no el PID destino. Por eso `kill -64 $$` te da root en tu propia shell: tú eres quien envía la señal. El PID destino es irrelevante en esta rama.
+* `prepare_creds()` te da una **copia modificable** de tus credenciales. El kernel no te deja tocar las originales directamente (son de solo lectura), así que primero te da un borrador.
+* **Los cuatro `= 0`** ponen a cero todos los campos que definen "quién eres" para el sistema (usuario, grupo, y sus variantes de permisos). OsEa **te convierten en root**. Es lo mismo que hace el kernel cuando un proceso es root, pero sin las comprobaciones de permisos, porque esto corre en ring 0 y aquí nadie te dice que no.
+* `commit_creds(creds)` aplica el borrador. A partir de aquí, el proceso **actual** es root.
+* El `return 0` sale **sin** llamar a `orig_kill`. La señal 64 nunca llega al kernel real: es un código de comando disfrazado de señal.
+
+#### ¿Y por qué `kill -64 $$` y no otro PID?
+
+Porque en esta rama el código **ni siquiera lee el PID destino** (`pt_regs->di`). Solo lee la señal. Lo que modifica son las credenciales de `current`, y `current` es **quien hizo la llamada**, o sea, tú. El PID destino es decorativo.
+
+Así que `kill -64 $$` te da root en **tu** shell porque el emisor eres tú. Podrías poner `kill -64 1` (apuntando a init) y el resultado sería el mismo: tu shell se vuelve root, init ni se entera. El rootkit le da root a **quien llama**, no a quien recibe .
+
+
+
+vale entonces despues de realizar nuestro analizis del malware de este rootkit , pasemos a la accion ,  el reto nos da una ip por lo que asumimos que es una maquina infectada , donde tendremos que buscar el rootkit que acabamos de encontrar y partile su madre descargarndolo del kernel y poder encontrar el archivo oculto&#x20;
+
+<figure><img src="../../../.gitbook/assets/image (146).png" alt=""><figcaption></figcaption></figure>
+
+iniciamos el la instancia y nos conectaremos por el confiable netcat
+
+<figure><img src="../../../.gitbook/assets/image (147).png" alt=""><figcaption></figcaption></figure>
+
+una ves dentro del servidor verificamos que usuario somos , con id vemos que valor de indentidad tenemos en el sistema como vemos es 1000 por lo que es un usuario estandar , si intentamos buscar la carpeta que el rootkit esta ocultado no veremos nada xd
+
+<figure><img src="../../../.gitbook/assets/image (148).png" alt=""><figcaption></figcaption></figure>
+
+incluso si intentamos ver los modulos cargados del kernel no se ejecuta nada , entonces.. recordando vimos que el rootkit tenia la funcion de darnos acceso root usando un codigo magico que manda una señal root  que era el "64" entonces le mandamos esa señal a nuestra terminal con el pid \$$.
+
+<figure><img src="../../../.gitbook/assets/image (149).png" alt=""><figcaption></figcaption></figure>
+
+y booom somos root  :O
+
+<figure><img src="../../../.gitbook/assets/image (150).png" alt=""><figcaption></figcaption></figure>
+
+volviendo a intentar buscar la carpeta que el rootkit oculta , exactamente encontramos pura vrga jajaja , pero espera y si listamos los modulos cargados de nuevo ..
+
+<figure><img src="../../../.gitbook/assets/image (151).png" alt=""><figcaption></figcaption></figure>
+
+fack HAHAHA
+
+bueno tampoco aparece nada , pero como no nos redimos , recordamos nuestro analizis forense del malware, recordamos que habia otro numero magico que era el... "46" para mostrar y ocultar el modulo hookiado o secuentrado o hackeado etc..&#x20;
+
+<figure><img src="../../../.gitbook/assets/image (152).png" alt=""><figcaption></figcaption></figure>
+
+y como vemos bumm , ahora si se nos listo el modulo modificado que contiene el rootkit  llamado diamorphine , entonces ya caido en la locura , descargamos el modulo del kernel para dejarlo con sus funciones originales y volvemos a buscar la carpeta.
+
+<figure><img src="../../../.gitbook/assets/image (153).png" alt=""><figcaption></figcaption></figure>
+
+una vez habiando descargado el modulo podemos ver donde se ocultaba el directorio y si porfin habiando encontrado la flag .
+
+<figure><img src="../../../.gitbook/assets/image (154).png" alt=""><figcaption></figcaption></figure>
+
+bueno que puedo decir , parece confunso por que  no tienes idea de donde buscar exactamente cuando ves codigo a bajo nivel , pero hey sirve para aprender la naturaleza de estos virus y malware que tienen impacato en la vida real .
