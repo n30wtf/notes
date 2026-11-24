@@ -170,3 +170,13 @@ una vez habiando descargado el modulo podemos ver donde se ocultaba el directori
 <figure><img src="../../../.gitbook/assets/image (154).png" alt=""><figcaption></figcaption></figure>
 
 bueno que puedo decir , parece confunso por que  no tienes idea de donde buscar exactamente cuando ves codigo a bajo nivel , pero hey sirve para aprender la naturaleza de estos virus y malware que tienen impacato en la vida real .
+
+spoonki , siempre hackeando , siempre webiando .
+
+| Función                                 | Qué hace                                                   |
+| --------------------------------------- | ---------------------------------------------------------- |
+| `hacked_kill`                           | Reemplaza al syscall kill (envío de señales)               |
+| `hacked_getdents` / `hacked_getdents64` | Reemplazan al syscall que lista directorios (`ls`, `find`) |
+| `give_root`                             | Escalada de privilegios                                    |
+| `module_hide` / `module_show`           | Oculta / muestra el módulo en lsmod                        |
+| `orig_kill`, `orig_getdents*`           | Los syscalls originales, guardados antes de hookear        |
