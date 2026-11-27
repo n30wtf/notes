@@ -13,7 +13,7 @@
   * [Forensis 1](picoctf/forensis-1.md)
   * [Web 1](picoctf/web-1.md)
   * [Cripto 1](picoctf/cripto-1.md)
-  * [ReV 1](picoctf/rev-1.md)
+  * [ReV](picoctf/rev.md)
 * [🐋 DockerLabs](dockerlabs/README.md)
   * [Muy Facil](dockerlabs/muy-facil/README.md)
     * [🤝  Trust](dockerlabs/muy-facil/trust.md)
